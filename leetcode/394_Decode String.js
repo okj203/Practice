@@ -24,3 +24,33 @@
 //
 // Input: s = "abc3[cd]xyz"
 // Output: "abccdcdcdxyz"
+
+
+let decodeString = function(s) {
+  let temp = '';
+  let multiply = []; // array of numbers
+  let output = '';
+  let charArr = []; // characters
+
+  for(let char of s) { // iterate through the s
+    if(!isNaN(char)) { // if char is a number,
+      temp += char; // add it to the tempMult, incase the number has more than single digit
+    } else if (char === '[') { // the opening bracket indicates that the number ended
+      multiply.push(temp); // push the number tempMult to the array of numbers to multiply
+      temp = ''; // reset it to ''
+
+      charArr.push(output);
+      output = '';
+    } else if (char === ']') { // closing bracket indicates that it's time to repeat the char
+      output = charArr.pop() + output.repeat(multiply.pop());
+    } else {
+      output += char; // none of the above applies = it's just a str;
+    }
+  }
+  return output;
+}
+
+
+
+
+//
