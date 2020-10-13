@@ -28,3 +28,67 @@
 // browserHistory.forward(2);                // You are in "linkedin.com", you cannot move forward any steps.
 // browserHistory.back(2);                   // You are in "linkedin.com", move back two steps to "facebook.com" then to "google.com". return "google.com"
 // browserHistory.back(7);                   // You are in "google.com", you can move back only one step to "leetcode.com". return "leetcode.com"
+
+
+let BrowserHistory = function(homepage){
+  this.history = {url: homepage}
+}
+
+BrowserHistory.prototype.visit = function(url){
+  this.history.next = {url: url, prev: this.history}
+  this.history = this.history.next;
+  return this.history.url;
+}
+
+BrowserHistory.prototype.back = function(steps){
+  let i = 0;
+  while(i < steps && this.history.prev){
+    this.history = this.history.prev;
+    i++;
+  }
+  return this.history.url;
+}
+
+BrowserHistory.prototype.forward = function(steps){
+  let i = 0;
+  while(i < steps && this.history.next) {
+    this.history = this.history.next;
+    i++;
+  }
+  return this.history.url;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// let BrowserHistory = function(homepage){
+//
+// }
+//
+// BrowserHistory.prototype.visit = function(url){
+//
+// }
+//
+// BrowserHistory.prototype.back = function(steps){
+//
+// }
+//
+// BrowserHistory.prototype.forward = function(steps){
+//
+// }
+//
