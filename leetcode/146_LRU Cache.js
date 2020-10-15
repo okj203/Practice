@@ -36,11 +36,21 @@ let LRUCache = function(capacity) {
 }
 
 LRUCache.prototype.get = function(key) {
+  if(!this.cache.get(key)) return -1;
 
+  let val = this.cache.get(key);
+  this.cache.delete(key);
+  this.cache.set(key, val);
+  return this.cache.get(key);
 }
 
-LRUCache.prototype.put = function(key, val) {
-
+LRUCache.prototype.put = function(key, value) {
+  this.cache.delete(key); // in case there is already a pair with the same key;
+  this.cache.set(key, value);
+  if(this.capacity < this.cache.size) {
+    this.cache.delete(Array.from(this.cache.keys())[0]);
+  }
+  return this.cache.get(key);
 }
 
 
