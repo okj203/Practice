@@ -57,3 +57,74 @@
 // undergroundSystem.checkIn(2, "Leyton", 21);
 // undergroundSystem.checkOut(2, "Paradise", 30);
 // undergroundSystem.getAverageTime("Leyton", "Paradise"); // return 6.66667
+
+let UndergroundSystem = function() {
+  this.idMap = new Map(); // keep track of all the passengers' info as k-v pair; // { 45 => { stationName: 'Leyton', checkInTime: 3 } }
+  this.durationMap = new Map(); // 'start, end' => [hour, hour, ...];  // { 'Leyton, Waterloo' => [ 12 ] }
+}
+
+UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
+  this.idMap.set(id, {stationName: stationName, checkInTime: t});
+  // if statement is not necc, as Map only keeps unique keys;
+}
+
+UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
+  let route = `${this.idMap.get(id).stationName}, ${stationName}`; // get the val with the id as the key (map method); record the routes;
+  let duration = t - this.idMap.get(id).checkInTime; // calculate the length of the travel time;
+
+  if(this.durationMap.has(route)) {
+    this.durationMap.get(route).push(duration);
+  } else {
+    this.durationMap.set(route, [duration]);
+  }
+}
+
+UndergroundSystem.prototype.getAverageTime = function(startStation, endStation){
+  let durationArr = this.durationMap.get(`${startStation}, ${endStation}`);
+  return durationArr.reduce((a,b) => a + b) / durationArr.length;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------
+//
+// let UndergroundSystem = function() {
+//
+// }
+//
+// UndergroundSystem.prototype.checkIn = function(id, stationName, t) {
+//
+// }
+//
+// UndergroundSystem.prototype.checkOut = function(id, stationName, t) {
+//
+// }
+//
+// UndergroundSystem.prototype.getAverageTime = function(startStation, endStation){
+//
+// }
