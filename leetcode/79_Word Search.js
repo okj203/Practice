@@ -44,5 +44,5 @@ let searchDFS = (board, word, i, j) => {
   return output;
 }
 
-// Time Complexity: O(NM)
+// Time Complexity: O(NM);
 // Space Complexity: O(NM); call stack;
