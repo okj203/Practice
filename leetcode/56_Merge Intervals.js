@@ -1,5 +1,5 @@
 // https://leetcode.com/problems/merge-intervals/
-//
+
 // 56. Merge Intervals
 // Given a collection of intervals, merge all overlapping intervals.
 //
